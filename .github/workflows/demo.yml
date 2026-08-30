@@ -9,8 +9,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache depndencies
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm ci
+        run: npm ci # 바로 위에서 정의한 캐시를 사용하여 의존성을 설치
       - name: Lint code
         run: npm run lint
       - name: Test code
@@ -23,8 +28,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache depndencies
+        uses: actions/cache@v6
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm ci
+        run: npm ci 
       - name: Build website
         run: npm run build 
       - name: Publish JS filename
