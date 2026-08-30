@@ -29,8 +29,8 @@ jobs:
         run: npm run build 
       - name: Publish JS filename
         id: publish
-        # run: find dist/assets/*.js -type f -exec echo 'script-file={}' >> $GITHUB_OUTPUT ';'
-        run: find dist/assets/*.js -typ f -exec echo '::set-output name=script-file::{}' ';'
+        # run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
         # 빌드 후 생성된 파일은 runner가 종료되면 삭제됨
         # 따라서, 빌드 후 생성된 파일을 아티팩트로 업로드하여 다음 job에서 사용할 수 있도록 함
       - name: Upload build artifacts
